@@ -1,0 +1,5 @@
+<p class="logout"><%= session[:admin] %> | <%=  link_to 'Выйти', session_logout_path %></p>
+<%= form_tag(user_path, :method => :get) do %>
+    <input type="text" name="q" id="find-field">
+    <input type="submit" name="find" id="find-button" value="Найти">
+<% end %>

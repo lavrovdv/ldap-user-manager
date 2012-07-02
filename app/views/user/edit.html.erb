@@ -1,0 +1,49 @@
+<div id="header">
+    <%=render 'header_find_menu'%>
+</div>
+<div id="left-menu">
+    <%=render 'left_menu'%>
+</div>
+<div id="content">
+    <div id="top-menu">
+        <%=render 'top_menu'%>
+        <%= link_to "Посмотреть", user_view_path+'/'+ (@user ? @user.uid : ''), :class => 'button' %>
+    </div>
+    <div id="content-wrapper">
+        <% if @user %>
+            <% if flash %>
+                <% if flash[:error] %><div class="message-error"><%=flash[:error]%></div><% end%>
+                <% if flash[:success] %><div class="message-success"><%=flash[:success]%></div><% end%>
+            <% end %>
+            <%= form_tag(user_edit_path + '/' + @user.uid) do %>
+                <table width="70%" style="margin-left: 10px">
+                    <tr>
+                        <td class="label">UID</td>
+                        <td class="desc"><%=@user.uid%></td>
+                    </tr>
+                    <%  User.edit_fields.each do |key| %>
+                        <tr>
+                            <td class="label">
+                                <%= User.pretty_field_name(key) %>
+                            </td>
+                            <td>
+                                <% if key == 'userPassword' %>
+                                    <input type="password" name="[form]<%= key %>" value="">
+                                <% elsif key == 'l' %>
+                                    <%= application_selector(@user) %>
+                                <% else %>
+                                    <input type="text" name="[form]<%= key %>" value="<%= @user.get_field(key) %>">
+                                <% end %>
+                            </td>
+                        </tr>
+                <% end %>
+                </table>
+                <input type="submit" class="button save" name="[form]save" value="Сохранить">
+            <% end%>
+        <% else %>
+            <div class="alert-message error">
+                    Пользователь не найден
+            </div>
+        <% end %>
+    </div>
+</div>

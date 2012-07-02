@@ -1,0 +1,31 @@
+<div id="header">
+    <%=render 'header_find_menu'%>
+</div>
+<div id="left-menu">
+    <%=render 'left_menu'%>
+</div>
+<div id="content">
+<div id="top-menu">
+    <%=render 'top_menu'%>
+</div>
+    <div id="content-wrapper">
+        <% if flash and flash[:error] %><div class="message-error"><%=flash[:error]%></div><% end %>
+        <%= form_tag(user_create_path) do %>
+            <table width="70%" style="margin-left: 10px">
+                <% User.new_fields.each do |field| %>
+                <tr>
+                    <td class="label"><%= User.pretty_field_name(field) %></td>
+                    <td>
+                        <% if field == 'l' %>
+                            <%= default_application_selector %>
+                        <% else %>
+                            <input type="<%= field == 'userPassword' ? 'password' : 'text'%>" name="[form]<%= field %>" value="<%=params[:form] and params[:form][field] ? params[:form][field] : ''%>">
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+            <input type="submit" class="button save" name="[form]save" value="Сохранить">
+        <% end %>
+    </div>
+</div>

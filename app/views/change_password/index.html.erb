@@ -1,0 +1,19 @@
+<%= link_to 'Выход', session_logout_path, :class => "logout" %>
+<div class="title">Страница изменения пароля</div>
+<div class="user">Пользователь - <span class="user_name"><%= @user.cn%></span></div>
+
+<div id="main">
+    <% if flash %>
+        <% if flash[:error] %><div class="error"><%= flash[:error] %></div><% end %>
+        <% if flash[:success] %><div class="sucsess"><%= flash[:success] %></div><% end %>
+    <% end %>
+    <%= form_tag(change_password_path) do %>
+        <span class="label">Пароль</span><br>
+        <input class="text" type="password" autofocus name="[form]oldPass"><br>
+        <span class="label">Новый пароль</span><br>
+        <input class="text" type="password" name="[form]newPass1"><br>
+        <span class="label">Повтор пароля</span><br>
+        <input class="text" type="password" name="[form]newPass2"><br>
+        <input class="submit" type="submit" value="Изменить">
+    <% end %>
+</div>

@@ -1,0 +1,17 @@
+<%= form_for(@application) do |f| %>
+  <% if @application.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h3>
+      <ul>
+      <% @application.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <label>Введите название приложения:<br>
+    <%= f.text_field :name, :value => @application.name, style: 'margin: 6px;' %></label>
+  <div class="actions">
+    <%= f.submit params[:action] == 'new' ? 'Добавить' : 'Изменить' %>
+  </div>
+<% end %>

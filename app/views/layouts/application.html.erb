@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OLUM</title>
+  <%= stylesheet_link_tag "user" %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "user" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if check_connection? %>
+    <%= yield %>
+<% else %>
+    <div class="message-error" style="margin-top: 20px">
+        Oтсутствует подключение к Openldap.
+    </div>
+<% end %>
+</body>
+</html>

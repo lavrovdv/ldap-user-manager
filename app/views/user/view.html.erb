@@ -1,0 +1,45 @@
+<div id="header">
+    <%= render 'header_find_menu' %>
+</div>
+<div id="left-menu">
+    <%= render 'left_menu' %>
+</div>
+<div id="content">
+
+    <div id="top-menu">
+        <%= render 'top_menu' %>
+        <%= link_to "Редакировать", user_edit_path+'/'+ (@user ? @user.uid : ''), :class => 'button' %>
+    </div>
+    <div id="content-wrapper">
+    <% if @user %>
+            <table width="70%" style="margin-left: 10px">
+                <% User.view_fields.each do |key|%>
+                    <tr>
+                        <td class="label"><%= User.pretty_field_name(key) %></td>
+                        <td class="desc">
+                            <%= @user.get_field(key)%>
+                        </td>
+                    </tr>
+                <% end %>
+            </table>
+            <a href="#" id="delete-button" class="button delete">Удалить</a>
+        <% else %>
+            <div class="message-error">
+                Пользователь <strong><%=params[:id]? params[:id] : ''%></strong> не найден
+            </div>
+        <% end %>
+    </div>
+</div>
+<div id="float-window">
+    <div id="window">
+        <div class="text">
+            Вы уверены, что хотите удалить пользователя - <span class="user-name"><%=@user? @user.uid : ''%></span>
+        </div>
+        <div class="buttons">
+            <div id="cancel" class="button">Отмена</div>
+            <a href="<%= user_path %>/delete/<%=@user? @user.uid : ''%>">
+                <div class="button delete">Удалить</div>
+            </a>
+        </div>
+    </div>
+</div>

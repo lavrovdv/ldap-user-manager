@@ -1,0 +1,11 @@
+
+<div id="tags">
+    <div class="tag-header">Группы</div>
+    <% Group.all.each do |group|%>
+        <%= link_to(user_path(:group=>group.cn)) do %>
+            <div class="tag <%= params[:group] == group.cn ? 'active' : ''%>">
+                <%=group.cn%>
+            </div>
+        <% end %>
+    <% end %>
+</div>

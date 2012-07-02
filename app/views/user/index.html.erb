@@ -1,0 +1,53 @@
+<div id="header">
+    <%=render 'header_find_menu'%>
+</div>
+<div id="left-menu">
+    <%=render 'left_menu'%>
+</div>
+<div id="content">
+<div id="top-menu">
+    <%=render 'top_menu'%>
+</div>
+
+<table id="user-list" border="0" cellspacing="0" cellpadding="0">
+<tr class="t-header">
+    <td class="f-name" width="30px"> № </td>
+    <td class="f-name" >UID</td>
+    <td class="f-name" >Email</td>
+    <td class="f-name" >Name</td>
+    <td class="f-name" width="35px" ></td>
+</tr>
+    <% @users.each_with_index do |user,i| %>
+    <tr class="user">
+        <td>
+            <%= link_to(user_view_path + '/' + user.uid) do %>
+                <div class="field" style="padding:0 10px 0 10px;" ><%= i+1%></div>
+            <% end %>
+        </td>
+        <td>
+            <%= link_to(user_view_path + '/' + user.uid) do %>
+                <div class="field"><%= user.uid%>&nbsp;</div>
+            <% end %>
+        </td>
+        <td>
+            <%= link_to(user_view_path + '/' + user.uid) do %>
+                <div class="field"><%= user.mail %>&nbsp;</div>
+            <% end %>
+        </td>
+        <td>
+            <%= link_to(user_view_path + '/' + user.uid) do %>
+                <div class="field"><%= user.givenName %> <%= user.sn %>&nbsp;</div>
+            <% end %>
+        </td>
+        <td>
+            <%= link_to(user_edit_path + '/' + user.uid) do %>
+                <div class="field edit_link">
+                    <%= image_tag "pencil32.png", :width => 23, :height => 23, :alt => "Редактировать", :title => "Редактировать" %>
+                </div>
+            <% end %>
+        </td>
+    </tr>
+    <% end %>
+</table>
+
+</div>

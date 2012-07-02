@@ -1,0 +1,34 @@
+<div id="header">
+    <%=render 'user/header_find_menu'%>
+</div>
+<div id="left-menu">
+    <%=render 'user/left_menu'%>
+</div>
+<div id="content">
+<div id="top-menu">
+    <%=render 'user/top_menu'%>
+    <%= link_to 'Добавить приложение', new_application_path, class: 'button green' %>
+</div>
+    <div id="content-wrapper" style="padding-left: 20px">
+<% if flash %>
+    <%= flash[:allow] if flash[:allow] %>
+    <%= flash[:deny] if flash[:deny] %>
+<% end %>
+<p id="notice"><%= notice %></p>
+<table>
+<% @applications.each do |application| %>
+  <tr>
+    <td style="background-color: #fafafa; padding: 0 10px 0 10px;"><span class="apps_name"><%= application.name %></span></td>
+    <% if application.default %>
+        <td><%= link_to 'Доступ запрещен', allow_path(application), class: 'button small red', title: 'Разрешить доступ по умолчанию, для новых пользователей' %></td>
+    <% else %>
+        <td><%= link_to 'Доступ разрешен', deny_path(application), class: 'button small green', title: 'Запретить доступ по умолчанию, для новых пользователей' %></td>
+    <% end %>
+
+    <td><%= link_to 'Изменить', edit_application_path(application), class: 'button small' %></td>
+    <td><%= link_to 'Удалить', application, confirm: 'Вы уверены, что ходите удалить приложение?', method: :delete, class: 'button small red' %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+</div>
